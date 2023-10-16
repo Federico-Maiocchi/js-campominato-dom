@@ -87,3 +87,41 @@ btnPlayDomElement.addEventListener('click', function () {
 
 
 })
+
+
+// FUNCTION
+
+// funzione per generare numeri random con un numero minmo e uno massimo
+function getRandomIntInclusive(min, max) {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+// Funzione per generare numeri(non doppi) dentro un array
+function getArrayOfRandomIntBetween(minRange, maxRange, number) {
+    // inizialliziamo un array vuoto 
+    const bombsArray = [];
+
+    // con un ciclo while riempiremo il nostro array
+    while (bombsArray.length < number) {
+        // inizializziamo una const n = che genererà un numero random da rangeMin a RangeMax 
+        const n = getRandomIntInclusive(minRange, maxRange);
+        // console.log(n);
+
+        // SE il nostro array(includes)  contiene dei numeri doppi === false
+        // oppure si può usare (!bombArray.includes(n))
+        if (!bombsArray.includes(n)) {
+            // allora tutti i numeri diversi verranno inseriti nel nostro array
+            bombsArray.push(n);
+        }
+
+        // ALTRIMENTI se ci sono dei numeri doppi, verranno toltli e si ripeterà il ciclo per trovare numeri differenti
+
+        // return array di numeri generati
+        return bombsArray
+    }
+}
+
+
+

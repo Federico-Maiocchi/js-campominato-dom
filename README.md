@@ -42,7 +42,7 @@ che poi useremo in seguito dentro il pulsante (btn-play)
         - maxRange dove indicheremo il massimo della cella (100)
         - number dove indicheremo il numero delle caselle bomba
 
-- inizialliziamo una varaibile array vuota chiamata bombsArray = []
+- inizialliziamo un array vuoto chiamata bombsArray = []
 - con un ciclo while riempiremo il nostro array 
     - inizializziamo una const n = che genererà un numero random da rangeMin a RangeMax 
     - dobbiamo togliere i numeri doppi dentro il nostro array,quindi:
