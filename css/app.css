@@ -1,0 +1,120 @@
+/* reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* general */
+body {
+    font-family: sans-serif;
+    background-color: cadetblue;
+}
+
+.container {
+    max-width: 650px;
+    margin: 0 auto;
+    background-color: white;
+    /* border: 1px solid black; */
+    /* padding: 20px; */
+}
+
+.p-05 {
+    padding: 5px;
+}
+
+.border-radius {
+    border-radius: 20px ;
+}
+
+.text-center {
+    text-align: center;
+}
+
+
+
+
+
+/* header */
+header {
+    padding-top: 30px;
+}
+/* title gmae */
+h1 {
+    margin-bottom: 15px;
+    font-size: 40px;
+}
+
+/* button play */
+#btn-play {
+    background-color: orange;
+    color: white;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 900;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.icon {
+    color: black;
+}
+
+/* difficulty */
+#difficulty {
+    padding: 10px;
+    font-size: 20px;
+}
+
+
+/* main game */
+main {
+    padding: 10px 0;
+}
+
+/* grid */
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* cell */
+.cell {
+    aspect-ratio: 1;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg-light-blue {
+    background-color: aqua;
+}
+
+.bg-green {
+    background-color: #58b84c;
+}
+
+.bg-blue {
+    background-color: #0068ff;
+}
+
+.bg-red {
+    background-color: #c40039;
+}
+
+.easy .cell {
+    width: calc(100% /10);
+    
+}
+
+.medium .cell {
+    width: calc(100% /9);
+    
+}
+
+.hard .cell {
+    width: calc(100% /7);
+    
+}
