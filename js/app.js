@@ -8,12 +8,20 @@ const gridDomeElement = document.querySelector('.grid');
 //richaimo l'elemento button play dal DOM
 const btnPlayDomElement = document.getElementById('btn-play');
 
+// inzializzo la variabile di conteggio del punteggio 
+let counterNumber = 0;
+
 // aggiungo l'evento click del pulsante play
 btnPlayDomElement.addEventListener('click', function () {
     // console.log('click')
 
     // cancello le celle precedenti
     gridDomeElement.innerHTML = '';
+
+    // rimuovo la classe dal grid DOM 
+    gridDomeElement.classList.remove('lose-block');
+
+    counterNumber = 0;
 
     // rimuovo le classi precedenti ,al grid delle cell LUNGHEZZA
     gridDomeElement.classList.remove('easy', 'medium', 'hard');
@@ -30,14 +38,15 @@ btnPlayDomElement.addEventListener('click', function () {
     const difficultyDomElement = document.getElementById('difficulty');
     // console.log(difficultyDomElement)
     let difficultyValue = difficultyDomElement.options[difficultyDomElement.selectedIndex].value;
-    console.log(difficultyValue);
+    console.log("difficultyValue", difficultyValue);
 
 
     // inizializiamo una varabile che co servirà per il conteggio delle cell
     let numberCell = -1
 
     
-
+    // const bomb = getArrayOfRandomIntBetween(1, numberCell, 16);
+    
     // tramite la selezione del ciclo cambierà la difficoltà
     // ogni sezione delle difficoltà avrà numero di celle differenti
     if (difficultyValue == 0) {
@@ -45,7 +54,7 @@ btnPlayDomElement.addEventListener('click', function () {
         numberCell = 100;
 
         // inizializziamo una variabile dove invocheremo la funzione getArrayOfRandomIntBetween per indicare le bombe
-        // const bomb = getArrayOfRandomIntBetween(1, numberCell, 16);
+        // bomb = getArrayOfRandomIntBetween(1, numberCell, 16);
         gridDomeElement.classList.add('easy');
         bodyDomElement.classList.add('bg-green');
         // console.log(bomb);
@@ -53,20 +62,19 @@ btnPlayDomElement.addEventListener('click', function () {
     } else if (difficultyValue == 1) {
         // nella difficoltà MEDIUM ne avrò 81 con una width: calc(100% /9)
         numberCell = 81
-        // const bomb = getArrayOfRandomIntBetween(1, numberCell, 16);
-        console.log(bomb);
+        // bomb = getArrayOfRandomIntBetween(1, numberCell, 16);
         gridDomeElement.classList.add('medium');
         bodyDomElement.classList.add('bg-blue');
 
     } else {
         // nella difficoltà HARD ne avrò 49 con una width: calc(100% /7)
         numberCell = 49
-        // const bomb = getArrayOfRandomIntBetween(1, numberCell, 16);
-        console.log(bomb);
         gridDomeElement.classList.add('hard');
         bodyDomElement.classList.add('bg-red');
     }
 
+
+    // creo una variabile dove invocherò la funzione bomb
     const bomb = getArrayOfRandomIntBetween(1, numberCell, 16);
     console.log(bomb);
 
@@ -95,38 +103,38 @@ btnPlayDomElement.addEventListener('click', function () {
         const currentCellElement = cellDomElements[i];
         // console.log(currentCellElement);
 
+        // converto la stringa currentCellElement in un numero
         const cellElement = parseInt(currentCellElement.innerHTML);
-        console.log(cellElement)
+        console.log(typeof cellElement)
 
 
-        
-
-
-        if (!bomb.includes(currentCellElement.innerHTML)) {
-            currentCellElement.addEventListener('click', function () {
-                currentCellElement.classList.add('bg-red');
-                console.log('cella n ' + currentCellElement.innerHTML + bomb);
-            })
-
-        } else if (bomb.includes(currentCellElement.innerHTML)) {
+        if (!bomb.includes(cellElement)) {
             currentCellElement.addEventListener('click', function () {
                 currentCellElement.classList.add('bg-light-blue');
-                console.log('cella n ' + currentCellElement.innerHTML + bomb );
+                // console.log('cella n ' + currentCellElement.innerHTML, bomb);
+
+                // aumento la prograssione del counter
+                counterNumber++;
+
+                // inizializzo una variabile che associo il counter 
+                let display = counterNumber;
+                // recupero dal DOM l'elemento display
+                let displayDomElement = document.querySelector('.display');
+                displayDomElement.innerHTML = display;
+            })
+
+        } else {
+            currentCellElement.addEventListener('click', function () {
+                currentCellElement.classList.add('bg-red');
+
+                gridDomeElement.classList.add('lose-block');
+                alert('Breavo! Hai perso!' + `hai fatto ${counterNumber} mosse`);
+                // console.log('cella n ' + currentCellElement.innerHTML, bomb );
             })
         }
-        // ogni elemento avrà l'evento click
-        
-        // (bomb.includes(currentCellElement.innerHTML)) {
-        //     currentCellElement.addEventListener('click', function () {
-        //         currentCellElement.classList.add('bg-red');
-        //         console.log('cella n ' + currentCellElement.innerHTML );
-
 
     }
-
-
 })
-
 
 // FUNCTION
 

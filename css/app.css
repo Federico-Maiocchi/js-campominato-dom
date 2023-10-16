@@ -61,6 +61,22 @@ h1 {
     color: black;
 }
 
+.counter {
+    font-size: 20px;
+    font-weight: 600;
+    margin-left: 30px;
+}
+
+.display {
+    color: white;
+    background-color: black;
+    padding: 5px 18px;
+    font-size: 25px;
+    font-weight: 800;
+    
+
+}
+
 /* difficulty */
 #difficulty {
     padding: 10px;
@@ -117,4 +133,8 @@ main {
 .hard .cell {
     width: calc(100% /7);
     
+}
+
+.lose-block {
+    pointer-events: none;
 }
