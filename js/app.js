@@ -20,11 +20,11 @@ btnPlayDomElement.addEventListener('click', function () {
 
     
     // richiamo dal dom il body
-    const bodyDomElement = document.querySelector('body')
-    console.log(bodyDomElement)
+    const bodyDomElement = document.querySelector('body');
+    console.log(bodyDomElement);
 
     // rimuovo le classi precedenti ,al body delle cell BG COLOR
-    bodyDomElement.classList.remove('bg-green','bg-blue','bg-red')
+    bodyDomElement.classList.remove('bg-green','bg-blue','bg-red');
 
     //richiamo dal DOM la la selezione delle difficoltà
     const difficultyDomElement = document.getElementById('difficulty');
@@ -32,27 +32,43 @@ btnPlayDomElement.addEventListener('click', function () {
     let difficultyValue = difficultyDomElement.options[difficultyDomElement.selectedIndex].value;
     console.log(difficultyValue);
 
+
     // inizializiamo una varabile che co servirà per il conteggio delle cell
     let numberCell = -1
+
+    
 
     // tramite la selezione del ciclo cambierà la difficoltà
     // ogni sezione delle difficoltà avrà numero di celle differenti
     if (difficultyValue == 0) {
         // nella difficoltà EASY ne avrò 100 con una width: calc(100% /10)
         numberCell = 100;
+
+        // inizializziamo una variabile dove invocheremo la funzione getArrayOfRandomIntBetween per indicare le bombe
+        // const bomb = getArrayOfRandomIntBetween(1, numberCell, 16);
         gridDomeElement.classList.add('easy');
-        bodyDomElement.classList.add('bg-green')
+        bodyDomElement.classList.add('bg-green');
+        // console.log(bomb);
+
     } else if (difficultyValue == 1) {
         // nella difficoltà MEDIUM ne avrò 81 con una width: calc(100% /9)
         numberCell = 81
+        // const bomb = getArrayOfRandomIntBetween(1, numberCell, 16);
+        console.log(bomb);
         gridDomeElement.classList.add('medium');
-        bodyDomElement.classList.add('bg-blue')
+        bodyDomElement.classList.add('bg-blue');
+
     } else {
         // nella difficoltà HARD ne avrò 49 con una width: calc(100% /7)
         numberCell = 49
+        // const bomb = getArrayOfRandomIntBetween(1, numberCell, 16);
+        console.log(bomb);
         gridDomeElement.classList.add('hard');
-        bodyDomElement.classList.add('bg-red')
+        bodyDomElement.classList.add('bg-red');
     }
+
+    const bomb = getArrayOfRandomIntBetween(1, numberCell, 16);
+    console.log(bomb);
 
     // usiamo il ciclo for per ricavare i numeri da 1 a 100
     // che metteremo nelle celle
@@ -73,15 +89,38 @@ btnPlayDomElement.addEventListener('click', function () {
     const cellDomElements = document.querySelectorAll('.cell');
     // console.log(cellDomElements);
 
-    // creo un arrei con gli elementi delle cell
+    // const bomb = getArrayOfRandomIntBetween(1, numberCell, 16);
+    // creo un array con gli elementi delle cell
     for (let i = 0; i < cellDomElements.length; i++) {
         const currentCellElement = cellDomElements[i];
         // console.log(currentCellElement);
 
+        const cellElement = parseInt(currentCellElement.innerHTML);
+        console.log(cellElement)
+
+
+        
+
+
+        if (!bomb.includes(currentCellElement.innerHTML)) {
+            currentCellElement.addEventListener('click', function () {
+                currentCellElement.classList.add('bg-red');
+                console.log('cella n ' + currentCellElement.innerHTML + bomb);
+            })
+
+        } else if (bomb.includes(currentCellElement.innerHTML)) {
+            currentCellElement.addEventListener('click', function () {
+                currentCellElement.classList.add('bg-light-blue');
+                console.log('cella n ' + currentCellElement.innerHTML + bomb );
+            })
+        }
         // ogni elemento avrà l'evento click
-        currentCellElement.addEventListener('click', function () {
-            currentCellElement.classList.add('bg-light-blue');
-        })
+        
+        // (bomb.includes(currentCellElement.innerHTML)) {
+        //     currentCellElement.addEventListener('click', function () {
+        //         currentCellElement.classList.add('bg-red');
+        //         console.log('cella n ' + currentCellElement.innerHTML );
+
 
     }
 
@@ -117,10 +156,10 @@ function getArrayOfRandomIntBetween(minRange, maxRange, number) {
         }
 
         // ALTRIMENTI se ci sono dei numeri doppi, verranno toltli e si ripeterà il ciclo per trovare numeri differenti
-
-        // return array di numeri generati
-        return bombsArray
     }
+
+    // return array di numeri generati
+    return bombsArray
 }
 
 
